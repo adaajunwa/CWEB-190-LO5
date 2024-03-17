@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+   Filename: constraint_validation_api.html
+   Author:   Michael Grzesina (grzesinam)
+   Date:     Winter 2023
+   Purpose:  Test form validation using the Constraint Validation API
+   -->
+    <meta charset="UTF-8" />
+    <title>Form Validation Test</title>
+    <style>
+        label.error {
+            margin-left: 0.5em;
+            color: red;
+        }
+        input.error, select.error, textarea.error {
+            background-color: lightpink;
+        }
+    </style>
+    <script src="scripts/jquery-3.6.4.min.js"></script>
+    <script src="scripts/jquery.validate.min.js"></script>
+    <script src="scripts/additional-methods.min.js"></script>
+    <script>
+        $(function() {
+            $.validator.addMethod("checkLuhnSINRule", function(value, elem) {
+                return this.optional(elem) || checkLuhnSIN(value);
+            }, "This is not a valid SIN - please correct it");
+
+            $("#testform").validate({
+                rules: {
+                    userpassword: {
+                        pattern: /[a-z]/
+                    },
+                    passwordconfirm: {
+                        equalTo: "#userpassword"
+                    },
+                    sin: {
+                        checkLuhnSINRule: true
+                    }
+                },
+                messages: {
+                    username: {
+                        required: "You must enter a username",
+                        pattern: "Username must be in the form cst### where # is a digit"
+                    },
+                    userpassword: {
+                        required: "You must enter a password",
+                        minlength: "Password must be at least 3 characters in length",
+                        pattern: "Password must contain at least one lowercase letter"
+                    },
+                    passwordconfirm: {
+                        required: "You must enter your password again for verification purposes",
+                        equalTo: "The original and confirmation passwords must match"
+                    },
+                    sin: {
+                        pattern: "SIN must be made up of 9 digits"
+                    },
+                    color: {
+                        required: "You must choose a color"
+                    },
+                    level: {
+                        required: "You must choose a level"
+                    }
+                }
+            });
+
+            $("#comments").on("input", countChars);
+        });
+
+
+        // This function isn't part of the constraint validation API or jQuery validation,
+        // just a neat little function that shows how you can add character counting to a text area
+        function countChars() {
+            let commentsField = document.getElementById("comments");
+            let numChars = commentsField.value.length;
+
+            if (numChars > 50) {
+                // shouldn't get here unless maxlength attribute is not enforced by browser
+                numChars = 50;
+                commentsField.value = commentsField.value.slice(0, 50);
+            }
+
+            document.getElementById("charsUsed").textContent = numChars;
+        }
+
+
+        // This function tests that whether value passed in meets the mathematical requirements for a SIN
+        // See https://en.wikipedia.org/wiki/Social_Insurance_Number#Validation
+        function checkLuhnSIN(value) {
+            let number = 0;
+            let multiplier = 1;
+            let digitString = "";
+
+            for (let i = 0; i < value.length; i++) {
+                digitString += Number(value.charAt(i)) * multiplier;
+                multiplier = (multiplier === 1) ? 2 : 1;
+            }
+
+            for (let i = 0; i < digitString.length; i++) {
+                number += Number(digitString.charAt(i));
+            }
+
+            return number % 10 === 0;
+        }
+    </script>
+</head>
+<body>
+<h1>Sample Form</h1>
+<form id="testform" name="testform" action="aformprocessor.html" method="get">
+    <fieldset>
+        <legend>Sample registration form</legend>
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required pattern="^cst\d{3}$" /><br /><br />
+
+        <label for="userpassword">Password:</label>
+        <input type="password" id="userpassword" name="userpassword" required minlength="3" /><br /><br />
+
+        <label for="passwordconfirm">Confirm password:</label>
+        <input type="password" id="passwordconfirm" name="passwordconfirm" required minlength="3" /><br /><br />
+
+        <label for="comments">Comments:</label>
+        <textarea id="comments" name="comments" maxlength="50"></textarea>
+        <span id="charsUsed">0</span> / 50 characters used<br /><br />
+
+        <label for="sin">Social Insurance Number:</label>
+        <input type="text" id="sin" name="sin" pattern="^\d{9}$" /><br /><br />
+
+        Icon Color: <input type="radio" id="redColor" name="color" value="R" required />
+        <label for="redColor">Red</label>
+        <input type="radio" id="greenColor" name="color" value="G" />
+        <label for="greenColor">Green</label>
+        <input type="radio" id="blueColor" name="color" value="B" />
+        <label for="blueColor">Blue</label>
+        <label for="color" id="color-error" class="error"></label> <!-- required so that error will show up at right of options -->
+        <br /><br />
+
+        <label for="level">Level:</label>
+        <select id="level" name="level" required>
+            <option value="">--Select your level--</option>
+            <option value="1">Beginner</option>
+            <option value="2">Advanced Beginner</option>
+            <option value="3">Moderate</option>
+            <option value="4">Experienced</option>
+            <option value="5">Expert</option>
+        </select><br /><br />
+
+        <button id="btnSubmit">Submit form</button>
+    </fieldset>
+</form>
+</body>
+</html>

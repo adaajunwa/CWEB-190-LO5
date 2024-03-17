@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Simple Form</title>
+        <link rel="stylesheet" href="../styles/form-start.css" />
+        <script src="scripts/jquery-3.6.4.min.js"></script>
+        <script src="scripts/jquery.validate.min.js"></script>
+        <script>
+            /* When the document is ready... */
+            $(function() {
+                $("#testForm").validate(); /* Call the validate method from jqueryvalidation */
+            });
+        </script>
+    </head>
+<style>
+    .errorMessage {
+        color: red;
+    }
+</style>
+    <body>
+        <form name="simpleForm" id="simpleFormID"
+              action="../aformprocessor.html" method="get">
+            <fieldset>
+                <legend>T-shirt ordering form</legend>
+
+                <label class="leftcol" for="name">Name on back:</label>
+                <input class="rightcol" type="text" id="name" name="name" maxlength="20" />
+
+                <label class="leftcol" for="size">Size:</label>
+                <select class="rightcol" id="size" name="size">
+                    <option value="">
+                        --Please select a size--
+                    </option>
+                    <option value="S">Small</option>
+                    <option value="M">Medium</option>
+                    <option value="L">Large</option>
+                </select>
+
+                <span class="leftcol">Colour:</span>
+                <span class="rightcol">
+                    <input type="radio" id="colourRed" name="colour" value="R" checked="checked" />
+                    <label for="colourRed">Red</label>
+                    <input type="radio" id="colourGreen" name="colour" value="G" />
+                    <label for="colourGreen">Green</label>
+                    <input type="radio" id="colourBlue" name="colour" value="B" />
+                    <label for="colourBlue">Blue</label>
+                </span>
+
+                <span class="leftcol rightalign">
+                    <input type="checkbox" id="forChild" name="forChild" value="yes" />
+                </span>
+                <label class="rightcol" for="forChild">Check if this is for a child</label>
+                <span class="errorMessage" id="error"></span>
+                <span class="buttons">
+                    <input type="submit" value="Place Order" />
+                    <input type="reset" value="Reset Form" />
+                </span>
+            </fieldset>
+        </form>
+        <script>
+            "use strict"
+            window.onload = init;
+            function init() {
+                document.getElementById("simpleFormID").onsubmit = handleSubmission;
+                document.getElementById("name").oninput = handleName;
+            }
+            function handleSubmission(event) {
+                alert("Form submission activated");
+                event.preventDefault();
+                //return false;
+            }
+
+             function handleName() {
+                 let element = document.getElementById("name");
+                 if (element.value.trim() === "") {
+                     document.getElementById("error").innerHTML = "Name field must not be blank";
+                     element.style.backgroundColor = "tomato";
+                 } else {
+                     document.getElementById("error").textContent = "";
+                     element.style.backgroundColor = "";
+                 }
+             }
+
+        </script>
+    </body>
+</html>

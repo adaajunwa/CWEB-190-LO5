@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+  Filename: last-form-example
+  Author:   Michael Grzesina (grzesinam)
+  Date:     Winter 2023
+  Purpose:  Demonstrate form validation
+-->
+    <meta charset="UTF-8" />
+    <title>Appointment Form</title>
+    <link rel="stylesheet" href="styles/jform.css" />
+</head>
+<body>
+    <form name="appointment" id="appointment" action="aformprocessor.html" method="get">
+        <fieldset>
+            <legend>Appointment Booking Form</legend>
+
+            <p>
+                <label for="myName">Name:</label>
+                <input id="myName" name="myName" type="text" />
+            </p>
+
+            <p>
+                <label for="myTime">Time:</label>
+                <input id="myTime" name="myTime" type="text" />
+            </p>
+
+            <p>
+                <label for="myType">Type:</label>
+                <select id="myType" name="myType">
+                    <option value="none">--Choose type of appointment--</option>
+                    <option value="i">Initial appointment</option>
+                    <option value="s">Subsequent appointment</option>
+                    <option value="o">Other</option>
+                </select>
+            </p>
+
+            <p>
+                <input type="submit" />
+            </p>
+        </fieldset>
+    </form>
+</body>
+</html>

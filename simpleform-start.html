@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Simple Form</title>
+        <link rel="stylesheet" href="../styles/form-start.css" />
+    </head>
+<style>
+    .errorMessage {
+        color: red;
+    }
+</style>
+    <body>
+        <form name="simpleForm" id="simpleFormID"
+              action="../aformprocessor.html" method="get">
+            <fieldset>
+                <legend>T-shirt ordering form</legend>
+
+                <label class="leftcol" for="name">Name on back:</label>
+                <input class="rightcol" type="text" id="name" name="name" maxlength="20" />
+
+                <label class="leftcol" for="size">Size:</label>
+                <select class="rightcol" id="size" name="size">
+                    <option value="">
+                        --Please select a size--
+                    </option>
+                    <option value="S">Small</option>
+                    <option value="M">Medium</option>
+                    <option value="L">Large</option>
+                </select>
+
+                <span class="leftcol">Colour:</span>
+                <span class="rightcol">
+                    <input type="radio" id="colourRed" name="colour" value="R" checked="checked" />
+                    <label for="colourRed">Red</label>
+                    <input type="radio" id="colourGreen" name="colour" value="G" />
+                    <label for="colourGreen">Green</label>
+                    <input type="radio" id="colourBlue" name="colour" value="B" />
+                    <label for="colourBlue">Blue</label>
+                </span>
+
+                <span class="leftcol rightalign">
+                    <input type="checkbox" id="forChild" name="forChild" value="yes" />
+                </span>
+                <label class="rightcol" for="forChild">Check if this is for a child</label>
+                <span class="errorMessage" id="error"></span>
+                <span class="buttons">
+                    <input type="submit" value="Place Order" />
+                    <input type="reset" value="Reset Form" />
+                </span>
+            </fieldset>
+        </form>
+        <script>
+            "use strict"
+            window.onload = init;
+            function init() {
+                document.getElementById("simpleFormID").onsubmit = handleSubmission;
+                document.getElementById("name").oninput = handleName;
+            }
+            function handleSubmission(event) {
+                alert("Form submission activated");
+                event.preventDefault();
+                //return false;
+            }
+
+            //Assign the first form element to formOld using old DOM
+            let formOld = 	document.forms[0]
+            document.write(formOld.id)// Output the form id
+            //output number of elements on the form using old DOM
+            document.write("<br>" +parseInt(formOld.elements.length))
+            //Assign the first element within the form using old DOM
+            let formFirst = document.forms[0].elements[1]
+            //output id of the first element within the form using old DOM
+            document.write("<br>" + formFirst.id)
+
+
+            //Assign the first form element to formW3C using W3C DOM (preferred)
+            let formW3C = document.getElementById("simpleFormID")
+            document.write("<br><br>" +formW3C.id)// Output the form id
+            //output number of elements on the form using W3C DOM
+            document.write("<br>" +parseInt(formW3C.elements.length))
+            //Assign the first element within the form using W3C DOM
+            let formFirstW3C = formW3C.elements[1] // document.getElementById("simpleFormID")
+            //output id of the first element within the form using W3C DOM
+            document.write("<br>" + formFirstW3C.id)
+
+
+            //Assign the array of all form elements to formElements
+            let formElements = document.getElementById("simpleFormID").elements
+            //declare and initiate outputString for holding output string
+            let outputString = ""
+            //Loop through Array of form elements and display output
+            for (let i = 0; i < formElements.length; i++) {
+                outputString = "Element " + i + " - Name: " + formElements[i].name;
+                outputString += ", Type: " + formElements[i].type;
+                outputString += ", Value: " + formElements[i].value;
+                document.write("<br>" +outputString);// display element info
+            }
+            //Change value of textbox
+            document.getElementById('name').value = "Shane is great"
+            //Change value of Select box
+            document.getElementById('size').value = "S"
+            //Check colour green radio button
+            document.getElementById('colourGreen').checked = true
+            //Assign the select(dropbox) element to select
+            let select = document.getElementById('size')
+            //display the text of the first option of the select element
+            document.write ("<br><br> first dropbox element is: "+select.options[0].text )
+            // display the selected dropbox element index
+            document.write("<br>index of selected dropbox element is: "+select.selectedIndex);
+            //display checked status of radio button "Red"
+          document.write("<br> Is Red radio button checked? "+document.getElementById("colourRed").checked)
+            // display default checked status of checkbox
+            document.write("<br>Is forChild checkbox checked by default? "+document.getElementById("forChild").defaultChecked);
+
+
+
+             function handleName() {
+                 let element = document.getElementById("name");
+                 if (element.value.trim() === "") {
+                     document.getElementById("error").innerHTML = "Name field must not be blank";
+                     element.style.backgroundColor = "tomato";
+                 } else {
+                     document.getElementById("error").textContent = "";
+                     element.style.backgroundColor = "";
+                 }
+             }
+
+        </script>
+    </body>
+</html>

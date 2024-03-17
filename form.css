@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+/* Format for all fieldsets */
+fieldset {
+	border: 1px solid black;
+	padding: 5px;
+	width: 22em;
+}
+
+/* Assign a class of leftcol to all elements
+   that are to be on the left side of the page. */
+.leftcol {
+	clear: left;
+	display: block;
+	float: left;
+	width: 30%;
+	margin: 7px 5px;
+}
+
+/* Assign a class of rightcol to all elements
+   that are to be on the right side of the page. */
+.rightcol {
+	display: block;
+	float: left;
+	width: 60%;
+	margin: 7px 0;
+}
+
+/* Use the rightalign class to specify an element
+   is to be right-aligned. */
+.rightalign {
+	text-align: right;
+}
+
+/* Centre the buttons on the page */
+.buttons {
+	clear: left;
+	display: block;
+	float: left;
+	width: 100%;
+	text-align: center;
+}
+
+
+/* UPDATED: make the errorMessage class display with a red text color */
+.errorMessage {
+	color: red;
+}

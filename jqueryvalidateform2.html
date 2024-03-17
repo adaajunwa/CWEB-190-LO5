@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>jQuery Form Validation</title>
+        <link rel="stylesheet" href="styles/jform.css" />
+        <!-- add jQuery script, FOLLOWED BY jQuery validation script -->
+        <script src="scripts/jquery-3.6.4.min.js"></script>
+        <script src="scripts/jquery.validate.min.js"></script>
+        <script>
+            /* When the document is ready... */
+          /*  $(function() {
+                $("#testForm").validate({
+                    rules: {
+                        name: {
+                            minlength: 2
+                        },
+                        "confirm-password": {
+                            equalTo: "#new-password"
+                        }
+                    },
+                    messages: {
+                        name: {
+                            required: "Please enter a name"
+                        },
+                        age: {
+                            required: "You must specify an age",
+                            digits: "Age must be a nonnegative number"
+                        },
+                        "confirm-password": {
+                            equalTo: "New and confirmed password must match"
+                        }
+                    }
+                });
+            }); */
+        </script>
+    </head>
+    <body>
+        <form id="testForm" action="aformprocessor.html" method="get">
+            <fieldset>
+                <legend>CST Information Form</legend>
+                
+                <p>
+                    <label for="name">Name</label>
+                    <em>*</em>
+                    <input id="name" name="name" type="text" size="30" maxlength="30" required />
+                </p>
+
+                <p>
+                    <label for="cstID">CST ID</label>
+                    <em>*</em>
+                    <input id="cstID" name="cstID" type="text" size="6" maxlength="6" required />
+                            <!--pattern="^[Cc][Ss][Tt]\d{3}$" -->
+                </p>
+
+                <p>
+                    <label for="email">Email</label>
+                    <em>*</em>
+                    <input id="email" name="email" type="email" size="30" maxlength="30" required />
+                </p>
+
+                <p>
+                    <label for="age">Age</label>
+                    <em>*</em>
+                    <input id="age" name="age" type="number" size="3" maxlength="3" required
+                           class="digits" />
+                </p>
+
+                <p>
+                    <label for="homepage">Homepage</label>
+                    <em>&nbsp;</em>
+                    <input id="homepage" name="homepage" type="url" size="50" maxlength="50" />
+                </p>
+
+                <p>
+                    <label for="new-password">Password</label>
+                    <em>&nbsp;</em>
+                    <input id="new-password" name="new-password" type="password" minlength="8" />
+                </p>
+
+                <p>
+                    <label for="confirm-password">Confirm</label>
+                    <em>&nbsp;</em>
+                    <input id="confirm-password" name="confirm-password" type="password" />
+                </p>
+
+                <p>
+                    <input type="submit" value="Submit Info" />
+                    <input type="reset" value="Reset Form" />
+                </p>
+            </fieldset>
+        </form>
+    </body>
+</html>

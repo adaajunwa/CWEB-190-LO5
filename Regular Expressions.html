@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="jqueryvalidateform.html">
+    <label for="regexTest">regex Test</label>
+    <input type="text" id="regexTest" name="regexTest" pattern="*[c][h][a-z]" title="Three letter country code"><br><br>
+    <input type="submit">
+</form>
+<script>
+    let str = "Michael Peters";
+    // search method returns the index of the character(s) searched for
+    let index = str.search(/e/);
+document.write(index)
+    //search method returns -1 if the character(s) searched for doesn't exist
+   index = str.search(/ai/);
+    document.write("<br>" +index)
+    //global match method (with the g) returns an array of matches found
+   let charArray = str.match(/e/g)
+    for (let i = 0; i < charArray.length; i++) {
+        document.write ("<br> Character e is in " + i)
+    }
+    document.write ("<br>" + str.match(/e/g))
+    //Test method of a regular expression returns a boolean
+    //based on whether the character can be found
+    document.write("<br> checks for bob: " +/Pet/.test(str))
+    //special flag i, used with regular expressions ignores
+    //the character's case during a search
+    document.write("<br> checks for 'p' while ignoring the case: "+ /p/i.test(str))
+    //[] encloses characters to match (works like an "OR" expression)
+     document.write("<br> characters a,b or e can be found "+str.match(/[abe]/g))
+     charArray = str.match(/[abe]/g)
+    for (let i = 0; i < charArray.length; i++) {
+        document.write ("<br> Character " + charArray[i]+ " is in " + i)
+    }
+    //- acts as a range operator for expression matches (when in square brackets)
+      document.write("<br> characters not a,b or e can be found: " +str.match(/[a-h]/g))
+    //^ acts as a "NOT" operator for expression matches (when included within the square brackets)
+    document.write("<br> characters not a,b or e can be found: " +str.match(/[^abe]/g))
+    //+ matches the character 1 or more times
+    str = "I love food noooom"
+    document.write("<br> characters with 1 or multiple Os can be found: " +str.match(/o+/g))
+    //? matches the character 0 or 1 time
+    str = "I'd love to be a bee beeee'"
+    document.write("<br> characters with 0 or 1 'e' after 'be' can be found: " +str.match(/bee?/g))
+    //* matches the character 0 or more times
+     str = "I love food noooom"
+    document.write("<br> characters with 0 or more Os can be found: " +str.match(/o*/g))
+    // What does this do?
+    str = "Joe loves adidas"
+    document.write("<br>"+ str.match(/[j]/i))
+    // What does this do: match(e[a-z]*s) and this match(e[a-z]+s)
+     str = "es for egs egy ekhs is foodooo"
+    document.write("<br> matches any sequence of characters starting with an e, ending with an s, and having 0 or more letters in the middle: " +str.match(/e[a-z]*s/g))
+    // "|" acts as an OR operator
+     str = "the beautiful ones are not yet born"
+    document.write("<br> one and born can be found: " +str.match(/one|born/g))
+    //^ at the start of the string (string MUST match at beginning)
+     str = "robobo"//"bobsert"
+    document.write("<br> Can the string bob be found at the beginning: " +str.match(/^bob/g))
+    //It's different when placed at the beginning of a square bracket
+    document.write("<br> Can the string bob be found: " +str.match(/[^bob]/g))
+    //$ at the end of the string (string MUST match at end)
+    str = "frontyard"// "backyards"
+    document.write("<br> Can the string yard be found at end: " +str.match(/yard$/g))
+    //for an exact match, enter ^ at the beginning of a string and $ at the end of the string
+     document.write("<br> Is there an exact match for yard: " +str.match(/^yard$/g))
+     str = "s4n 3k8"
+    document.write("<br> Is there an exact match for postal code: " +str.match(/^[A-Z][0-9][A-Z][ ]?[0-9][A-Z][0-9]$/i))
+
+</script>
+</body>
+</html>

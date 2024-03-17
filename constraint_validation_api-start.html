@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <!--  
+  Filename: constraint_validation_api.html
+  Author:   Michael Grzesina (grzesinam)
+  Date:     Winter 2023
+  Purpose:  Test form validation using the Constraint Validation API
+  -->
+   <meta charset="UTF-8" />
+   <title>Form Validation Test</title>
+</head>
+<body>
+   <h1>Sample Form</h1>
+   <form id="testform" name="testform" action="aformprocessor.html" method="get">
+      <fieldset>
+         <legend>Sample registration form</legend>
+
+         <label for="username">Username:</label>
+         <input type="text" id="username" name="username" required pattern="^cst\d{3}$" /><br /><br />
+
+         <label for="userpassword">Password:</label>
+         <input type="password" id="userpassword" name="userpassword" required minlength="3" /><br /><br />
+
+         <label for="passwordconfirm">Confirm password:</label>
+         <input type="password" id="passwordconfirm" name="passwordconfirm" required minlength="3" /><br /><br />
+
+         <label for="comments">Comments:</label>
+         <textarea id="comments" name="comments" maxlength="50"></textarea>
+         <span id="charsUsed">0</span> / 50 characters used<br /><br />
+
+         <label for="sin">Social Insurance Number:</label>
+         <input type="text" id="sin" name="sin" pattern="^\d{9}$" /><br /><br />
+
+         Icon Color: <input type="radio" id="redColor" name="color" value="R" required />
+         <label for="redColor">Red</label>
+         <input type="radio" id="greenColor" name="color" value="G" />
+         <label for="greenColor">Green</label>
+         <input type="radio" id="blueColor" name="color" value="B" />
+         <label for="blueColor">Blue</label><br /><br />
+
+         <label for="level">Level:</label>
+         <select id="level" name="level" required>
+            <option value="">--Select your level--</option>
+            <option value="1">Beginner</option>
+            <option value="2">Advanced Beginner</option>
+            <option value="3">Moderate</option>
+            <option value="4">Experienced</option>
+            <option value="5">Expert</option>
+         </select><br /><br />
+
+         <button id="btnSubmit">Submit form</button>
+      </fieldset>
+   </form>
+</body>
+</html>

@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+body {
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+fieldset {
+	border: 1px solid black;
+	padding: 5px;
+}
+
+label {
+	width: 5em;
+	float: left;
+}
+
+p {
+	clear: both;
+}
+
+em {
+	font-weight: bold;
+	padding-right: 1em;
+	vertical-align: top;
+}
+
+label.error {
+	float: none;
+	color: red;
+	padding-left: .5em;
+	vertical-align: top;
+}
+
+input.error, select.error {
+	background-color: purple;
+}

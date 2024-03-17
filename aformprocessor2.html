@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <!--  
+  Filename: aformprocessor.html
+  Author:   Michael Grzesina (cst000)
+  Date:     3/6/2019
+  Purpose:  Process form information sent using the get method
+  -->
+   <meta charset="UTF-8">
+   <title>A Form Processor</title>
+</head>
+<body>
+   <h1>Form Information Sent</h1>
+   <section id="output"></section>
+
+   <script>
+      "use strict";
+
+      let outputSection = document.getElementById("output");
+      let queryString = location.search.slice(1).replace(/\+/g, " ");
+      /*document.write("<br>" + location);
+      document.write("<br>" + location.search);
+      document.write("<br>" + location.search.slice(1))
+      document.write("<br>" +  location.search.slice(1).match(/\+/g))*/
+
+      if (queryString) {
+          let queryComponents = queryString.split("&");
+          for (let i = 0; i < queryComponents.length; i++) {
+              let queryParts = queryComponents[i].split("=");
+              outputSection.innerHTML +="<br> <strong>" +queryParts[0] +" </strong>is set to <strong>" + queryParts[1] +" </strong>"
+
+          }
+         /*for (let i = 0; i < queryComponents.length; i++) {
+            document.write("<br>" + queryComponents[i])
+            let queryParts = queryComponents[i].split("=");
+            for (let i = 0; i < queryParts.length; i++) {
+               document.write("<br>" + queryParts[i])
+               //document.write ("<br> <strong>" +queryParts[0] +" </strong>is set to <strong>" + queryParts[1] +" </strong>")
+            }
+         }*/
+         }
+
+
+   </script>
+</body>
+</html>
